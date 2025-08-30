@@ -1,0 +1,116 @@
+.main-hero-contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 100px;
+    gap: 50px;
+}
+
+.main-hero-contact-right {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    width: 50%;
+    padding: 20px;
+}
+
+.main-hero-contact-right * {
+    width: 522px;
+}
+
+.main-hero-contact-left {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+@media (max-width:1150px) {
+    .main-hero-contact {
+        flex-direction: column;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .main-hero-contact-right,
+    .main-hero-contact-left {
+        width: 100%;
+        padding: 10px;
+        align-items: center;
+    }
+}
+
+@media (max-width:590px) {
+    .main-hero-contact-left>img {
+        width: 322px;
+    }
+
+    .main-hero-contact-right * {
+        width: 322px;
+    }
+
+    .main-hero-contact-left {
+        width: 322px;
+
+    }
+}
+
+.contact-form {
+    margin: auto;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 40px;
+}
+
+.send-a-message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.send-a-message-form input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.send-a-message-form textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.send-a-message-form button {
+    width: 30%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease-in-out;
+}
+
+.send-a-message-form button:hover {
+    background-color: #F9A826;
+    cursor: pointer;
+    color: white;
+    transform: scale(1.05);
+}
+
+@media (max-width:590px) {
+    .contact-form {
+        width: 350px;
+    }
+
+    .send-a-message-form button {
+        width: 40%;
+    }
+}

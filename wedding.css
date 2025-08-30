@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white; /* Single solid color instead of gradient */
+}
+
+.slider-container {
+  margin-top: 25%;
+  height: calc(100vh - 80px);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  max-width: 1200px; /* Added max-width */
+  margin-left: auto; /* Center container */
+  margin-right: auto; /* Center container */
+}
+
+.slider {
+  height: 100%;
+  width: 100%;
+}
+
+.slider div {
+  height: 100%;
+}
+
+.slider img {
+  width: 80%; /* Reduced from 100% */
+  height: auto; /* Changed from 100% */
+  object-fit: contain;
+  margin: 0 auto; /* Center image */
+  max-height: 70vh; /* Added max-height */
+}
+
+.slick-track {
+  will-change: transform;
+  display: flex !important;
+}
+
+.slick-list {
+  overflow: visible;
+  will-change: transform;
+}
+
+.slick-slide {
+  padding: 0 20px; /* Reduced padding */
+  width: 100vw;
+  position: relative;
+  filter: drop-shadow(0px 5px 20px rgba(0,0,0,0.3)); /* Reduced shadow */
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.slick-slide.slick-active {
+  opacity: 1;
+}
+
+/* Hide arrows by default */
+.slick-prev,
+.slick-next {
+  display: none !important;
+}
+
+.slick-prev {
+  left: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slick-next {
+  right: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slick-prev:hover {
+  left: 15px;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.slick-next:hover {
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Dots */
+.slick-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  gap: 10px;
+  list-style: none;
+}
+
+.slick-dots li button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  font-size: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slick-dots li.slick-active button {
+  background: white;
+  transform: scale(1.2);
+}
+
+@keyframes motion-blur {
+  0% {
+    filter: url(#blur0);
+    transform: scale(1);
+  }
+  20% {
+    filter: url(#blur1);
+    transform: scale(0.98);
+  }
+  40% {
+    filter: url(#blur2);
+    transform: scale(0.96);
+  }
+  60% {
+    filter: url(#blur3);
+    transform: scale(0.94);
+  }
+  80% {
+    filter: url(#blur4);
+    transform: scale(0.92);
+  }
+  100% {
+    filter: url(#blur5);
+    transform: scale(0.9);
+  }
+}
+
+.do-transition {
+  animation: 
+    motion-blur 0.1s linear forwards,
+    motion-blur 0.4s linear reverse forwards 0.1s;
+}
+
+/* Fix navbar overlap */
+.navbar-container-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Slide Description */
+.slide-description {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #333;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    width: 80%;
+    max-width: 600px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.slick-active .slide-description {
+    background-color: rgba(255, 255, 255, 0);
+    height: auto;
+    opacity: 1;
+}
+
+.slide-description h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #F9A826;
+}
+
+.slide-description p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .slick-slide {
+    padding: 0 20px;
+  }
+
+  .slick-prev {
+    left: 10px;
+  }
+
+  .slick-next {
+    right: 10px;
+  }
+
+  .slick-dots {
+    bottom: 10px;
+  }
+
+  .slide-description {
+        bottom: 40px;
+        padding: 15px 20px;
+    }
+
+    .slide-description h3 {
+        font-size: 1.2rem;
+    }
+
+    .slide-description p {
+        font-size: 0.9rem;
+    }
+}
+

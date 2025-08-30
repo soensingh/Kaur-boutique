@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - Kaur Boutique</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./cart.css">
+    <style>
+        .clear-cart-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .clear-cart-button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Update this to accommodate both buttons */
+        .cart-summary button {
+            margin-top: 20px;
+        }
+
+        /* Additional cart item styles */
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 2fr 1fr 1fr auto;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+        }
+        
+        .item-image img {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+        }
+        
+        .item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .item-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .item-price {
+            color: #666;
+        }
+        
+        .item-category {
+            color: #999;
+            font-size: 0.9rem;
+            text-transform: capitalize;
+        }
+        
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .item-quantity button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .item-quantity button:hover {
+            background: #f5f5f5;
+        }
+        
+        .item-subtotal {
+            font-weight: bold;
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        
+        .remove-item:hover {
+            color: #f44336;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .continue-shopping-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #F9A826;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="navbar-container-main">
+        <div class="navbar-logo">
+            <img src="./assets/svg/logo.png" alt="kaur boutique logo">
+        </div>
+
+        <nav class="navbar-links-container-nav">
+            <div class="navbar-links">
+                <a href="./index.html#featured-products" class="montserrat-font">PRODUCTS</a>
+                <a href="./shop.html" class="montserrat-font">SHOP</a>
+                <a href="./wedding.html" class="montserrat-font">WEDDINGS</a>
+                <a href="./services.html" class="montserrat-font">SERVICES</a>
+                <a href="./contact.html" class="montserrat-font">CONTACT</a>
+            </div>
+        </nav>
+
+        <div class="navbar-icons">
+            
+            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="disable-590 cart-active cart-icon">
+                <path d="M17.4206 10.9949L18.98 4.13377C19.0926 3.63839 18.716 3.16665 18.208 3.16665H5.25165L4.9493 1.68855C4.87396 1.32012 4.54977 1.05554 4.1737 1.05554H0.791667C0.354436 1.05554 0 1.40998 0 1.84721V2.37499C0 2.81222 0.354436 3.16665 0.791667 3.16665H3.09684L5.41404 14.4952C4.85968 14.814 4.48611 15.4118 4.48611 16.0972C4.48611 17.1174 5.31314 17.9444 6.33333 17.9444C7.35353 17.9444 8.18056 17.1174 8.18056 16.0972C8.18056 15.5802 7.96789 15.1131 7.6256 14.7778H14.541C14.1988 15.1131 13.9861 15.5802 13.9861 16.0972C13.9861 17.1174 14.8131 17.9444 15.8333 17.9444C16.8535 17.9444 17.6806 17.1174 17.6806 16.0972C17.6806 15.3658 17.2554 14.7338 16.6389 14.4345L16.8209 13.6338C16.9335 13.1384 16.5569 12.6667 16.0489 12.6667H7.19483L6.97894 11.6111H16.6487C17.0183 11.6111 17.3387 11.3553 17.4206 10.9949Z"/>
+            </svg>
+        </div>
+    </div>
+
+    
+    <main class="cart-container">
+        <h1>My Cart</h1>
+        <div class="cart-content">
+            <div class="cart-items">
+                
+            </div>
+            <div class="cart-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>₹ 2097</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>₹ 99</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>₹ 2196</span>
+                    </div>
+                </div>
+                <button class="clear-cart-button">Clear Cart</button>
+                <button class="checkout-button">Proceed to Checkout</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="./script.js"></script>
+    <script src="./cart.js"></script>
+</body>
+</html>

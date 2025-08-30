@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Kaur Boutique</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .register-form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .register-form h2 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-family: "Montserrat", sans-serif;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #F9A826;
+        }
+
+        .register-btn {
+            background: #F9A826;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+            width: 100%;
+        }
+
+        .register-btn:hover {
+            background: #e89615;
+            transform: translateY(-2px);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            font-family: "Montserrat", sans-serif;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: #F9A826;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            color: #e89615;
+        }
+
+        .right-img-content {
+            display: none;
+        }
+
+        .left-text-content {
+            width: 100%;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Copy the entire navbar from login.html -->
+    <div class="navbar-container-main">
+
+        <div class="navbar-logo">
+            <img src="./assets/svg/logo.png" alt="kaur boutique logo">
+        </div>
+
+        <nav class="navbar-links-container-nav">
+            <div class="navbar-links">
+                <a href="./index.html#featured-products" class="montserrat-font">PRODUCTS</a>
+                <a href="./shop.html" class="montserrat-font">SHOP</a>
+                <a href="./wedding.html" class="montserrat-font">WEDDINGS</a>
+                <a href="./services.html" class="montserrat-font">SERVICES</a>
+                <a href="./contact.html" class="montserrat-font">CONTACT</a>
+            </div>
+        </nav>
+
+        <div class="navbar-icons">
+            
+
+            <svg width="216px" height="216px" viewBox="0 0 24.00 24.00" xmlns="http://www.w3.org/2000/svg"
+                class="menu-icon-navbar">
+
+                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M4 6H20M4 12H20M4 18H20" stroke-width="2.4" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="navbar-dropdown">
+            <div class="navbar-dropdown-content">
+                <a href="#featured-products" class="montserrat-font">PRODUCTS</a>
+                <a href="#" class="montserrat-font">SHOP</a>
+                <a href="#" class="montserrat-font">WEDDINGS</a>
+                <a href="./services.html" class="montserrat-font">SERVICES</a>
+                <a href="#" class="montserrat-font">CONTACT</a>
+                <a href="#" class="montserrat-font icon-dropdown" id="align-bottom">MY CART</a>
+                <a href="#" class="montserrat-font icon-dropdown" id="search-dropdown">SEARCH</a>
+                <a href="#" class="montserrat-font icon-dropdown">LOGIN / REGISTER</a>
+            </div>
+        </div>
+
+        <div class="navbar-search-bar">
+            <input type="text" placeholder="Find your outfit" class="navbar-search-input">
+            <button class="navbar-search-button">Go</button>
+        </div>
+
+    </div>
+
+    <!-- Hero with Register Form -->
+    <div class="main-hero-container">
+        <div class="black-overlay">
+            <div class="register-container">
+                <div class="register-form">
+                    <h2>Register</h2>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="register-btn">Register</button>
+                        <div class="form-footer">
+                            <p>Already have an account? <a href="./login.html">Login</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+.main-hero-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.main-hero-content p {
+    font-size: 3rem;
+    margin-bottom: 45px;
+    font-weight: 100;
+}
+
+.main-hero-content h1 {
+    font-size: 5.5rem;
+    margin: 0;
+    line-height: 0.9;
+    font-weight: 700;
+    width: 100%;
+}
+
+
+
+/* service cards */
+
+
+.services-service-content {
+    width: 100%;
+    padding: 50px 0;
+}
+
+.header-services-service p {
+    width: 780px;
+    font-size: 1.5rem;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    color: black;
+    font-weight: 500;
+}
+
+.header-services-service {
+    margin-bottom: 80px;
+}
+
+.services-service-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    padding: 20px;
+}
+
+.service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+box-shadow: -10px 5px 50px black;}
+
+.service-card img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h2 {
+    width: 600px;
+    font-size: 1.5rem;
+    margin: 20px 0;
+    font-weight: 600;
+}
+
+.service-card p {
+    width: 600px;
+    font-size: 0.9rem;
+    color: #333;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.service-card button {
+    text-decoration: none;
+    border: 1px solid rgb(179, 179, 179);
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.service-card button:hover {
+    background-color: rgb(179, 179, 179);
+    color: white;
+    transform: scale(1.1);
+}
+
+@media (max-width: 1318px) {
+    .services-service-cards {
+        flex-direction: column;
+    }
+
+    .header-services-service {
+        margin-bottom: 20px;
+    }
+
+}
+
+@media (max-width: 790px) {
+    .header-services-service p {
+        width: 80%;
+    }
+
+}
+
+@media (max-width:650px) {
+    .services-service-cards {
+        padding: 40px 0;
+    }
+
+    .service-card {
+        width: 90%;
+    }
+
+    .service-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    .service-card p {
+        width: 80%;
+    }
+
+    .service-card h2 {
+        width: 80%;
+    }
+
+    .main-hero-content h1 {
+        width: 90%;
+        font-size: 2.5rem;
+    }
+
+    .main-hero-content p {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+}
