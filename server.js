@@ -18,12 +18,13 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname)));
 
 // Database connection using connection pool for better stability
+// Use environment variables with fallbacks for better security and flexibility
 const db = mysql.createPool({
-  host: 'mysql.railway.internal',       // From your Railway env variables
-  port: 3306,                           // Standard MySQL port
-  user: 'root',                         // From your Railway env variables
-  password: 'utzIpdlgnvgogneQaEcgdGPeHWbcTLys', // From your Railway env variables
-  database: 'railway',                  // From your Railway env variables
+  host: process.env.DB_HOST || 'mysql.railway.internal',
+  port: parseInt(process.env.DB_PORT || '3306'),
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'utzIpdlgnvgogneQaEcgdGPeHWbcTLys',
+  database: process.env.DB_NAME || 'railway',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -44,79 +45,83 @@ db.getConnection((err, connection) => {
 
 // Function to initialize database tables if they don't exist
 function initDatabase() {
-  const createUsersTable = `
-    CREATE TABLE IF NOT EXISTS users (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      username VARCHAR(100) NOT NULL,
-      email VARCHAR(100) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL,
-      phone VARCHAR(15),
-      reset_token VARCHAR(255),
-      reset_token_expires DATETIME,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-  `;
-  
-  const createProductsTable = `
-    CREATE TABLE IF NOT EXISTS products (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      price DECIMAL(10,2) NOT NULL,
-      category VARCHAR(100),
-      image_url VARCHAR(255),
-      size VARCHAR(50),
-      description TEXT,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-  `;
-  
-  const createCartsTable = `
-    CREATE TABLE IF NOT EXISTS carts (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      user_id INT NOT NULL,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (user_id) REFERENCES users(id)
-    )
-  `;
-  
-  const createCartItemsTable = `
-    CREATE TABLE IF NOT EXISTS cart_items (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      cart_id INT NOT NULL,
-      product_id INT NOT NULL,
-      quantity INT DEFAULT 1,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (cart_id) REFERENCES carts(id),
-      FOREIGN KEY (product_id) REFERENCES products(id)
-    )
-  `;
+  try {
+    const createUsersTable = `
+      CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(100) NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        phone VARCHAR(15),
+        reset_token VARCHAR(255),
+        reset_token_expires DATETIME,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `;
+    
+    const createProductsTable = `
+      CREATE TABLE IF NOT EXISTS products (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        price DECIMAL(10,2) NOT NULL,
+        category VARCHAR(100),
+        image_url VARCHAR(255),
+        size VARCHAR(50),
+        description TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `;
+    
+    const createCartsTable = `
+      CREATE TABLE IF NOT EXISTS carts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+      )
+    `;
+    
+    const createCartItemsTable = `
+      CREATE TABLE IF NOT EXISTS cart_items (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        cart_id INT NOT NULL,
+        product_id INT NOT NULL,
+        quantity INT DEFAULT 1,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (cart_id) REFERENCES carts(id),
+        FOREIGN KEY (product_id) REFERENCES products(id)
+      )
+    `;
 
-  db.query(createUsersTable, err => {
-    if (err) console.error('Error creating users table:', err);
-    else console.log('Users table ready');
-  });
-  
-  db.query(createProductsTable, err => {
-    if (err) console.error('Error creating products table:', err);
-    else console.log('Products table ready');
-  });
-  
-  db.query(createCartsTable, err => {
-    if (err) console.error('Error creating carts table:', err);
-    else console.log('Carts table ready');
-  });
-  
-  db.query(createCartItemsTable, err => {
-    if (err) console.error('Error creating cart_items table:', err);
-    else console.log('Cart items table ready');
-  });
+    db.query(createUsersTable, err => {
+      if (err) console.error('Error creating users table:', err);
+      else console.log('Users table ready');
+    });
+    
+    db.query(createProductsTable, err => {
+      if (err) console.error('Error creating products table:', err);
+      else console.log('Products table ready');
+    });
+    
+    db.query(createCartsTable, err => {
+      if (err) console.error('Error creating carts table:', err);
+      else console.log('Carts table ready');
+    });
+    
+    db.query(createCartItemsTable, err => {
+      if (err) console.error('Error creating cart_items table:', err);
+      else console.log('Cart items table ready');
+    });
+  } catch (error) {
+    console.error('Error initializing database:', error);
+  }
 }
 
 // Create a transporter for sending emails - using a placeholder service
 // You should set these as environment variables in Railway
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST || 'smtp.ethereal.email', 
-  port: process.env.EMAIL_PORT || 587,
+  port: parseInt(process.env.EMAIL_PORT || '587'),
   secure: process.env.EMAIL_SECURE === 'true' || false,
   auth: {
     user: process.env.EMAIL_USER || 'test@example.com',
@@ -510,30 +515,6 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
-
-// Update this in your frontend JS files (like script.js, shop.js, etc.)
-
-// Instead of hardcoded localhost URLs like:
-// fetch('http://localhost:3000/api/login')
-
-// Use relative URLs:
-fetch('/api/login')
-
-// Or a dynamic base URL:
-const API_BASE_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:3000'
-  : '';
-  
-// Then use it like:
-fetch(`${API_BASE_URL}/api/login`)
-
-document.addEventListener('DOMContentLoaded', function() {
-  const newArrivalsButton = document.getElementById('new-arrivals-btn');
-  
-  if (newArrivalsButton) {
-    newArrivalsButton.addEventListener('click', function() {
-      // Your existing code
-    });
-  }
+}).on('error', (err) => {
+  console.error('Server failed to start:', err);
 });
