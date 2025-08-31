@@ -19,10 +19,10 @@ app.use(express.static(path.join(__dirname)));
 
 // Database connection
 const db = mysql.createConnection({
-  host: 'localhost',
+  host: 'shuttle.proxy.rlwy.net',
   user: 'root',
-  password: 'sswsj234okm',
-  database: 'kaur_boutique'
+  password: 'utzIpdlgnvgogneQaEcgdGPeHWbcTLys',
+  database: 'railway'
 });
 
 db.connect(err => {
@@ -416,7 +416,7 @@ app.post('/api/check-duplicates', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3306;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
