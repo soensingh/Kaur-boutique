@@ -19,12 +19,21 @@ app.use(express.static(path.join(__dirname)));
 
 // Database connection using connection pool for better stability
 // Use environment variables with fallbacks for better security and flexibility
+// Database connection configuration
 const db = mysql.createPool({
-  host: process.env.DB_HOST || 'mysql.railway.internal',
+  host: process.env.NODE_ENV === 'production' 
+    ? (process.env.DB_HOST || 'mysql.railway.internal')
+    : 'localhost',
   port: parseInt(process.env.DB_PORT || '3306'),
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'utzIpdlgnvgogneQaEcgdGPeHWbcTLys',
-  database: process.env.DB_NAME || 'railway',
+  user: process.env.NODE_ENV === 'production'
+    ? (process.env.DB_USER || 'root')
+    : 'root',
+  password: process.env.NODE_ENV === 'production'
+    ? (process.env.DB_PASSWORD || 'utzIpdlgnvgogneQaEcgdGPeHWbcTLys')
+    : '', // Use your local MySQL password here
+  database: process.env.NODE_ENV === 'production'
+    ? (process.env.DB_NAME || 'railway')
+    : 'kaur_boutique', // Use your local database name
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
