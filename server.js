@@ -30,7 +30,7 @@ const db = mysql.createPool({
     : 'root',
   password: process.env.NODE_ENV === 'production'
     ? (process.env.DB_PASSWORD || 'utzIpdlgnvgogneQaEcgdGPeHWbcTLys')
-    : '', // Use your local MySQL password here
+    : 'sswsj234okm', // Use your local MySQL password here
   database: process.env.NODE_ENV === 'production'
     ? (process.env.DB_NAME || 'railway')
     : 'kaur_boutique', // Use your local database name
