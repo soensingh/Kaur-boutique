@@ -511,3 +511,29 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// Update this in your frontend JS files (like script.js, shop.js, etc.)
+
+// Instead of hardcoded localhost URLs like:
+// fetch('http://localhost:3000/api/login')
+
+// Use relative URLs:
+fetch('/api/login')
+
+// Or a dynamic base URL:
+const API_BASE_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3000'
+  : '';
+  
+// Then use it like:
+fetch(`${API_BASE_URL}/api/login`)
+
+document.addEventListener('DOMContentLoaded', function() {
+  const newArrivalsButton = document.getElementById('new-arrivals-btn');
+  
+  if (newArrivalsButton) {
+    newArrivalsButton.addEventListener('click', function() {
+      // Your existing code
+    });
+  }
+});
